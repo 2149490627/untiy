@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>紫藤萝小镇</title>
+
+    <link rel="icon" href="测试图片/活动图标素材.png" type="image/png">
+
+    <style>
+        /* ===== 全局重置 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #0b0b1a;
+        }
+
+        /* ===== 背景容器 ===== */
+        .parallax-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        /* ===== 每张背景图 ===== */
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 110%;
+            height: 110%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            will-change: transform;
+            transition: none;
+        }
+
+        .layer-bg {
+            background-image: url('测试图片/黄泉路背景素材.jpg');
+            z-index: 1;
+        }
+
+        .layer-mid {
+            background-image: url('测试图片/黄泉路背景素材.jpg');
+            z-index: 2;
+            opacity: .9;
+        }
+
+        .layer-fore {
+            background-image: url('测试图片/血液屏幕素材.png');
+            z-index: 3;
+            opacity: 0.8;
+        }
+
+        .overlay-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+            pointer-events: none;
+        }
+
+        /* ===== 内容层 ===== */
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            pointer-events: none;
+        }
+
+        .game-title {
+            font-size: clamp(2.4rem, 10vw, 4.2rem);
+            font-weight: 800;
+            letter-spacing: 4px;
+            /*background: linear-gradient(135deg, #f0e6ff, #a0d0ff);*/
+            background: linear-gradient(135deg, #a29bfe, #fd79a8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            /*text-shadow: 0 0 30px rgba(0, 200, 255, 0.4); /* ← 外发光颜色 */ */ margin-bottom: 0.2em;
+            pointer-events: none;
+        }
+
+        .game-sub {
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 6px;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            text-shadow: 0 0 20px rgba(0,0,0,0.7);
+            pointer-events: none;
+        }
+
+        .download-btn {
+            display: inline-block;
+            pointer-events: auto;
+            padding: 18px 58px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #fff;
+            /*/background: linear-gradient(145deg, #6a4cff, #3a7bd5);*/
+            background: linear-gradient(145deg, #222222, #000000);
+            border: none;
+            border-radius: 60px;
+            box-shadow: 0 10px 40px rgba(60, 80, 255, 0.5), 0 0 0 2px rgba(255, 255, 255, 0.1) inset;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+            .download-btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0 16px 50px rgba(60, 80, 255, 0.7), 0 0 0 3px rgba(255, 255, 255, 0.3) inset;
+            }
+
+            .download-btn:active {
+                transform: scale(0.95);
+            }
+
+        .footer-tip {
+            position: absolute;
+            bottom: 28px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            font-weight: 300;
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            .download-btn {
+                padding: 16px 40px;
+                font-size: 1.4rem;
+                border-radius: 50px;
+                width: 80%;
+                max-width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 视差背景层 ===== -->
+    <div class="parallax-container" id="parallaxContainer">
+        <div class="parallax-layer layer-bg" data-depth="0.02"></div>
+        <div class="parallax-layer layer-mid" data-depth="0.26"></div>
+        <div class="parallax-layer layer-fore" data-depth=".05"></div>
+        <div class="overlay-mask"></div>
+    </div>
+
+    <!-- ===== 内容 ===== -->
+    <div class="content">
+        <div class="game-title">紫 藤 萝 小 镇</div>
+        <div class="game-sub">
+            The stories behind them
+        </div>
+        <button class="download-btn" id="downloadBtn">下载</button>
+    </div>
+
+    <div class="footer-tip">✦ 治愈社交 紫藤萝小镇 ✦</div>
+
+    <script>
+        (function () {
+            const layers = document.querySelectorAll('.parallax-layer');
+            let mouseX = 0, mouseY = 0;
+            let currentX = 0, currentY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth) * 2 - 1;
+                const y = (e.clientY / window.innerHeight) * 2 - 1;
+                mouseX = x;
+                mouseY = y;
+            });
+
+            document.addEventListener('touchmove', (e) => {
+                if (e.touches.length > 0) {
+                    const touch = e.touches[0];
+                    const x = (touch.clientX / window.innerWidth) * 2 - 1;
+                    const y = (touch.clientY / window.innerHeight) * 2 - 1;
+                    mouseX = x;
+                    mouseY = y;
+                }
+            }, { passive: true });
+
+            function updateParallax() {
+                currentX += (mouseX - currentX) * 0.08;
+                currentY += (mouseY - currentY) * 0.08;
+
+                layers.forEach((layer) => {
+                    const depth = parseFloat(layer.dataset.depth) || 0.05;
+                    const offsetX = currentX * depth * 30;
+                    const offsetY = currentY * depth * 30;
+                    layer.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+                });
+
+                requestAnimationFrame(updateParallax);
+            }
+
+            updateParallax();
+        })();
+
+        // ===== ✅ 修正后的下载按钮事件 =====
+        // 注意：这里的 ID 是 downloadBtn，不是 myButton
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // 添加调试：检查按钮是否找到
+        console.log('按钮元素:', downloadBtn);
+
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                console.log('按钮被点击了！'); // 调试用
+
+                const link = document.createElement('a');
+                link.href = '../UNITY/KEKE.zip';
+                link.download = 'KEKE.zip';
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        } else {
+            console.error('找不到按钮！请检查 ID 是否为 downloadBtn');
+        }
+    </script>
+
+</body>
+</html>
