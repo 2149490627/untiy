@@ -168,6 +168,28 @@
 </head>
 <body>
 
+    <script>
+        // ===== 自动检测版本更新，强制刷新缓存 =====
+        (function () {
+            // 当前网站版本号（每次更新时改这个数字）
+            const VERSION = '20260715_01';
+
+            // 从 localStorage 获取之前保存的版本号
+            const oldVersion = localStorage.getItem('site_version');
+
+            if (oldVersion !== VERSION) {
+                // 版本不同，说明网站更新了，强制刷新
+                console.log('检测到网站更新，正在刷新...');
+                localStorage.setItem('site_version', VERSION);
+
+                // 强制刷新（从服务器重新加载）
+                window.location.reload(true); // true 表示强制从服务器加载
+            } else {
+                console.log('网站已是最新版本');
+            }
+        })();
+    </script>
+
     <!-- ===== 视差背景层 ===== -->
     <div class="parallax-container" id="parallaxContainer">
         <div class="parallax-layer layer-bg" data-depth="0.02"></div>
